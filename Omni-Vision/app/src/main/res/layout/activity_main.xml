@@ -8,7 +8,8 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     tools:context="com.example.omni_vision.MainActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/mainMenuLayout">
 
     <SurfaceView
         android:id="@+id/surfaceview"
@@ -25,7 +26,6 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/holo_red_light"
         android:orientation="horizontal">
-
 
         <Button
             android:id="@+id/leftMainButton"
@@ -46,8 +46,6 @@
             android:text="Wiki"
             android:layout_toRightOf="@+id/leftMainButton"/>
 
-
-
         <Button
             android:id="@+id/gmailButton"
             android:layout_width="wrap_content"
@@ -57,8 +55,6 @@
             android:padding="5dp"
             android:text="GMAIL"
             android:layout_toRightOf="@+id/wikiPediaButton"/>
-
-
     </RelativeLayout>
 
     <LinearLayout
@@ -97,7 +93,15 @@
             android:text="Right"/>
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/leftFrameLauout"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/leftMainButtonFrame">
 
-
+    </FrameLayout>
 
 </RelativeLayout>

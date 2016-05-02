@@ -3,7 +3,6 @@ package com.example.omni_vision;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     Button rightMainButton;
     Button youTubeButton;
     Button mapsButton;
+    boolean leftMainMenuNotShowing = true;
+    boolean rightMainMenuNotShowing = true;
 
 
 
@@ -63,14 +64,48 @@ public class MainActivity extends AppCompatActivity {
         mapsButton = (Button) findViewById(R.id.mapsButton);
         mapsButton.setVisibility(View.GONE);
 
+        /**
+         * Main menu clickListeners and behaviors.
+         */
+        leftMainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (leftMainMenuNotShowing){
+                    wikiPediaButton.setVisibility(View.VISIBLE);
+                    gmailButton.setVisibility(View.VISIBLE);
+                    leftMainMenuNotShowing = false;
+                }
+                else if (!leftMainMenuNotShowing){
+                    wikiPediaButton.setVisibility(View.GONE);
+                    gmailButton.setVisibility(View.GONE);
+                    leftMainMenuNotShowing = true;
+                }
+            }
+        });
+
+        rightMainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rightMainMenuNotShowing){
+                    youTubeButton.setVisibility(View.VISIBLE);
+                    mapsButton.setVisibility(View.VISIBLE);
+                    rightMainMenuNotShowing = false;
+                }
+                else if (!rightMainMenuNotShowing){
+                    youTubeButton.setVisibility(View.GONE);
+                    mapsButton.setVisibility(View.GONE);
+                    rightMainMenuNotShowing = true;
+                }
+            }
+        });
+
     }
 
     /**
      * ----------------End OnCreate-----------------------------------------------------------------
-     * <p/>
+     *
      * ----------------Start Methods----------------------------------------------------------------
      */
-
 
     @Override
     public void onResume() {
