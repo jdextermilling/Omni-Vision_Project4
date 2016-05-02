@@ -9,7 +9,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity{
+
+//                                        implepments SurfaceViewHolder.Callback
+public class MainActivity extends AppCompatActivity{
 
     private SurfaceView preview=null;
     private SurfaceHolder previewHolder=null;
@@ -32,6 +34,7 @@ public class MainActivity extends Activity{
         previewHolder=preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        camera = Camera.open();
 
 //---------------first try with the camera ------------------------------------------------------
 //        surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
@@ -55,7 +58,7 @@ public class MainActivity extends Activity{
         super.onResume();
 
         releaseCameraAndPreview();
-        camera.open();
+        camera = Camera.open();
         startPreview();
     }
 
