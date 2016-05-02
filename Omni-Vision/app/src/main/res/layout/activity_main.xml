@@ -12,6 +12,14 @@
     <SurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
+
+    <Button
+        android:id="@+id/leftMainButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_blue_light"
+        />
     
 </LinearLayout>
