@@ -97,6 +97,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        gmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.support.v4.app.FragmentManager fragmentManager2 = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
+
+                GmailWebViewFragment fragment = new GmailWebViewFragment();
+                fragmentTransaction.add(R.id.leftFrameLayout, fragment);
+                fragmentTransaction.commit();
+                leftFrameLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
 
 
 
@@ -150,6 +163,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        rightCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                youTubeButton.setVisibility(View.GONE);
+                mapsButton.setVisibility(View.GONE);
+                rightCloseButton.setVisibility(View.GONE);
+                rightFrameLayout.setVisibility(View.GONE);
+                rightMainMenuNotShowing = true;
+            }
+        });
+
     }
 
     /**
@@ -190,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Hides the Status bar and soft keys.
      * Causes non-fatal errors.
-     *
      * @param hasFocus
      */
 
@@ -207,6 +230,14 @@ public class MainActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
+    /**
+     * Methods related to camera functionality.
+     * @param width
+     * @param height
+     * @param parameters
+     * @return
+     */
 
     private Camera.Size getBestPreviewSize(int width, int height, Camera.Parameters parameters) {
         Camera.Size result = null;
