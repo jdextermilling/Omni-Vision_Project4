@@ -124,7 +124,11 @@ public class MainActivity extends AppCompatActivity {
         leftCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                wikiPediaButton.setVisibility(View.GONE);
+                gmailButton.setVisibility(View.GONE);
+                leftCloseButton.setVisibility(View.GONE);
+                leftFrameLayout.setVisibility(View.GONE);
+                leftMainMenuNotShowing = true;
             }
         });
 
