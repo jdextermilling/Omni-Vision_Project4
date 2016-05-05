@@ -75,6 +75,32 @@
             android:alpha="0.5"
             android:textColor="@android:color/white"/>
 
+        <EditText
+            android:id="@+id/customWebViewEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Address"
+            android:layout_below="@+id/customButton"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="100dp"/>
+
+        <Button
+            android:id="@+id/urlSubmittButton"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="105dp"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:layout_toRightOf="@+id/customWebViewEditText"
+            android:layout_below="@+id/customButton"
+            android:text="Submitt"
+            android:textColor="@android:color/white"/>
+
     </RelativeLayout>
 
     <LinearLayout

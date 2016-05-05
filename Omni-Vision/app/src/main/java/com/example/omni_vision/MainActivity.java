@@ -12,6 +12,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -37,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
     Button youTubeButton;
     Button mapsButton;
     Button customButton;
+    Button urlSubmittButton;
+    EditText customWebViewEditText;
     boolean leftMainMenuNotShowing = true;
     boolean rightMainMenuNotShowing = true;
     boolean wikiPediaFragmentNotShowing = true;
     boolean gmailFragmentNotShowing = true;
+    boolean customFragmentNotShowing = true;
     FrameLayout leftFrameLayout, rightFrameLayout;
 
 
@@ -79,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
         mapsButton = (Button) findViewById(R.id.mapsButton);
         mapsButton.setVisibility(View.GONE);
         customButton = (Button) findViewById(R.id.customButton);
+        customButton.setVisibility(View.GONE);
+        customWebViewEditText = (EditText) findViewById(R.id.customWebViewEditText);
+        customWebViewEditText.setVisibility(View.GONE);
+        urlSubmittButton = (Button) findViewById(R.id.urlSubmittButton);
+        urlSubmittButton.setVisibility(View.GONE);
+
 
 
         /**
@@ -99,11 +109,12 @@ public class MainActivity extends AppCompatActivity {
                 if(wikiPediaFragmentNotShowing) {
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
                     WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
                     fragmentTransaction.add(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
+                    customWebViewEditText.setVisibility(View.GONE);
+                    urlSubmittButton.setVisibility(View.GONE);
                     wikiPediaFragmentNotShowing = false;
                 } else if(!wikiPediaFragmentNotShowing){
                     leftFrameLayout.setVisibility(View.GONE);
@@ -119,11 +130,12 @@ public class MainActivity extends AppCompatActivity {
                 if(gmailFragmentNotShowing) {
                     android.support.v4.app.FragmentManager fragmentManager2 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
-
                     GmailWebViewFragment fragment = new GmailWebViewFragment();
                     fragmentTransaction.add(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
+                    customWebViewEditText.setVisibility(View.GONE);
+                    urlSubmittButton.setVisibility(View.GONE);
                     gmailFragmentNotShowing = false;
                 } else if(!gmailFragmentNotShowing){
                     leftFrameLayout.setVisibility(View.GONE);
@@ -131,6 +143,39 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        customButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(customFragmentNotShowing) {
+                    android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
+                    CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
+                    fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
+                    fragmentTransaction.commit();
+
+                    String customULRL;
+
+                    Bundle bundle = new Bundle();
+                    customULRL = customWebViewEditText.getText().toString();
+                    bundle.putString("customURL", "From Activity");
+
+                    customWebViewFragment.setArguments(bundle);
+
+
+                    urlSubmittButton.setVisibility(View.VISIBLE);
+                    customWebViewEditText.setVisibility(View.VISIBLE);
+                    leftFrameLayout.setVisibility(View.VISIBLE);
+                    customFragmentNotShowing = false;
+                } else if(!customFragmentNotShowing){
+                    urlSubmittButton.setVisibility(View.GONE);
+                    customWebViewEditText.setVisibility(View.GONE);
+                    leftFrameLayout.setVisibility(View.GONE);
+                    customFragmentNotShowing = true;
+                }
+            }
+        });
+
 
 
 
@@ -144,11 +189,13 @@ public class MainActivity extends AppCompatActivity {
                 if (leftMainMenuNotShowing){
                     wikiPediaButton.setVisibility(View.VISIBLE);
                     gmailButton.setVisibility(View.VISIBLE);
+                    customButton.setVisibility(View.VISIBLE);
                     leftMainMenuNotShowing = false;
                 }
                 else if (!leftMainMenuNotShowing){
                     wikiPediaButton.setVisibility(View.GONE);
                     gmailButton.setVisibility(View.GONE);
+                    customButton.setVisibility(View.GONE);
                     leftMainMenuNotShowing = true;
                 }
             }
