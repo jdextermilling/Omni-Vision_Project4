@@ -148,24 +148,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(customFragmentNotShowing) {
-                    android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
-                    CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
-                    fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
-                    fragmentTransaction.commit();
-
-                    String customULRL;
-
-                    Bundle bundle = new Bundle();
-                    customULRL = customWebViewEditText.getText().toString();
-                    bundle.putString("customURL", "From Activity");
-
-                    customWebViewFragment.setArguments(bundle);
-
-
                     urlSubmittButton.setVisibility(View.VISIBLE);
                     customWebViewEditText.setVisibility(View.VISIBLE);
-                    leftFrameLayout.setVisibility(View.VISIBLE);
                     customFragmentNotShowing = false;
                 } else if(!customFragmentNotShowing){
                     urlSubmittButton.setVisibility(View.GONE);
@@ -176,8 +160,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        urlSubmittButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
 
+                CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
 
+                customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
+                fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
+                fragmentTransaction.commit();
+
+//                String customULRL;
+//
+//                Bundle bundle = new Bundle();
+//                customULRL = customWebViewEditText.getText().toString();
+//                bundle.putString("customURL", "From Activity");
+//
+//                customWebViewFragment.setArguments(bundle);
+
+                leftFrameLayout.setVisibility(View.VISIBLE);
+            }
+        });
 
 
         /**
@@ -196,11 +201,12 @@ public class MainActivity extends AppCompatActivity {
                     wikiPediaButton.setVisibility(View.GONE);
                     gmailButton.setVisibility(View.GONE);
                     customButton.setVisibility(View.GONE);
+                    customWebViewEditText.setVisibility(View.GONE);
+                    urlSubmittButton.setVisibility(View.GONE);
                     leftMainMenuNotShowing = true;
                 }
             }
         });
-
 
         rightMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 

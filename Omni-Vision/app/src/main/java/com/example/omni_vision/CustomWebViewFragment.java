@@ -16,31 +16,35 @@ import android.widget.ListView;
 public class CustomWebViewFragment extends Fragment {
 
     WebView myWebView;
-    final static String customURL = "http://espn.go.com/"; // update to editText input
+    String customURL = "http://espn.go.com/"; // update to editText input
     String myUrl;
 
     private Bundle webViewBundle;
 
-    OnUrlSelectedListener mListener;
-
-    public interface OnUrlSelectedListener {
-        public void onUrlSelected(String selectedUrl);
+    public void setCustomURL(String customURL){
+        this.customURL = "http://www." +customURL;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mListener = (OnUrlSelectedListener) getActivity();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement OnUrlSelectedListener");
-        }
-    }
+//    OnUrlSelectedListener mListener;
+//
+//    public interface OnUrlSelectedListener {
+//        public void onUrlSelected(String selectedUrl);
+//    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        try {
+//            mListener = (OnUrlSelectedListener) getActivity();
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(getActivity().toString() + " must implement OnUrlSelectedListener");
+//        }
+//    }
 
-    @Override
-    public void onListItemClick() {
-        mListener.onUrlSelected();
-    }
+//    @Override
+//    public void onListItemClick() {
+//        mListener.onUrlSelected();
+//    }
 
 
     @Override
@@ -69,22 +73,22 @@ public class CustomWebViewFragment extends Fragment {
             return true;
         }
     }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setRetainInstance(true);
-        if (webViewBundle != null)
-        {
-            myWebView.restoreState(webViewBundle);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        webViewBundle = new Bundle();
-        myWebView.saveState(webViewBundle);
-    }
+//
+//    @Override
+//    public void onActivityCreated(Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        setRetainInstance(true);
+//        if (webViewBundle != null)
+//        {
+//            myWebView.restoreState(webViewBundle);
+//        }
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//
+//        webViewBundle = new Bundle();
+//        myWebView.saveState(webViewBundle);
+//    }
 }

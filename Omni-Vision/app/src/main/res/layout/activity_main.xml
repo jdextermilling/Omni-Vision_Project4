@@ -36,7 +36,7 @@
             android:background="@android:color/holo_blue_dark"
             android:padding="5dp"
             android:alpha="0.5"
-            android:text="Left"
+            android:text="Web"
             android:textColor="@android:color/white"/>
 
         <Button
@@ -79,7 +79,8 @@
             android:id="@+id/customWebViewEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter Address"
+            android:hint="Enter Web Address"
+            android:padding="3dp"
             android:layout_below="@+id/customButton"
             android:background="@android:color/holo_orange_dark"
             android:alpha="0.5"
@@ -93,7 +94,7 @@
             android:layout_height="30dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="105dp"
+            android:layout_marginLeft="57dp"
             android:background="@android:color/holo_orange_dark"
             android:alpha="0.5"
             android:layout_toRightOf="@+id/customWebViewEditText"
@@ -150,7 +151,7 @@
 
     <RelativeLayout
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/leftMainButtonFrame">
@@ -160,7 +161,7 @@
             android:layout_width="350dp"
             android:layout_height="450dp"
 
-            android:layout_marginBottom="20dp"
+
             android:layout_marginLeft="20dp"
             android:background="@android:color/holo_red_dark"
             android:alpha="0.5">
@@ -172,7 +173,7 @@
             android:layout_height="450dp"
 
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="20dp"
+
             android:layout_marginRight="20dp"
             android:background="@android:color/holo_red_dark"
             android:alpha="0.5">
