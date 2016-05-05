@@ -36,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
     Button rightMainButton;
     Button youTubeButton;
     Button mapsButton;
-    Button leftCloseButton;
-    Button rightCloseButton;
+    Button customButton;
     boolean leftMainMenuNotShowing = true;
     boolean rightMainMenuNotShowing = true;
+    boolean wikiPediaFragmentNotShowing = true;
+    boolean gmailFragmentNotShowing = true;
     FrameLayout leftFrameLayout, rightFrameLayout;
 
 
@@ -49,19 +50,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Setting up the camera.
+        /**
+         * Setting up the camera.
+         */
         preview = (SurfaceView) findViewById(R.id.surfaceview);
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         camera = Camera.open();
 
-        // Getting the main menu button on top (in front of) camera preview
+        /**
+         * Getting the main menu button on top (in front of) camera preview
+         */
         leftMainButton = (Button) findViewById(R.id.leftMainButton);
         leftMainButton.bringToFront();
         preview.invalidate();
 
-        //Instantiating and setting up main menu buttons.
+        /**
+         * Instantiating and setting up main menu buttons.
+         */
         wikiPediaButton = (Button) findViewById(R.id.wikiPediaButton);
         wikiPediaButton.setVisibility(View.GONE);
         gmailButton = (Button) findViewById(R.id.gmailButton);
@@ -71,42 +78,57 @@ public class MainActivity extends AppCompatActivity {
         youTubeButton.setVisibility(View.GONE);
         mapsButton = (Button) findViewById(R.id.mapsButton);
         mapsButton.setVisibility(View.GONE);
-        leftCloseButton = (Button) findViewById(R.id.leftCloseButton);
-        leftCloseButton.setVisibility(View.GONE);
-        rightCloseButton = (Button) findViewById(R.id.rightCloseButton);
-        rightCloseButton.setVisibility(View.GONE);
+        customButton = (Button) findViewById(R.id.customButton);
 
-        // Setting up FrameLayouts
+
+        /**
+         *  Setting up FrameLayouts
+         */
         leftFrameLayout = (FrameLayout) findViewById(R.id.leftFrameLayout);
         rightFrameLayout = (FrameLayout) findViewById(R.id.rightFrameLayout);
         leftFrameLayout.setVisibility(View.GONE);
         rightFrameLayout.setVisibility(View.GONE);
 
 
-
+        /**
+         * Left sub-Main Button click-listeners and behaviors
+         */
         wikiPediaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                if(wikiPediaFragmentNotShowing) {
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
-                fragmentTransaction.add(R.id.leftFrameLayout, fragment);
-                fragmentTransaction.commit();
-                leftFrameLayout.setVisibility(View.VISIBLE);
+                    WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
+                    fragmentTransaction.add(R.id.leftFrameLayout, fragment);
+                    fragmentTransaction.commit();
+                    leftFrameLayout.setVisibility(View.VISIBLE);
+                    wikiPediaFragmentNotShowing = false;
+                } else if(!wikiPediaFragmentNotShowing){
+                    leftFrameLayout.setVisibility(View.GONE);
+                    wikiPediaFragmentNotShowing = true;
+
+                }
             }
         });
 
         gmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentManager fragmentManager2 = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
+                if(gmailFragmentNotShowing) {
+                    android.support.v4.app.FragmentManager fragmentManager2 = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
 
-                GmailWebViewFragment fragment = new GmailWebViewFragment();
-                fragmentTransaction.add(R.id.leftFrameLayout, fragment);
-                fragmentTransaction.commit();
-                leftFrameLayout.setVisibility(View.VISIBLE);
+                    GmailWebViewFragment fragment = new GmailWebViewFragment();
+                    fragmentTransaction.add(R.id.leftFrameLayout, fragment);
+                    fragmentTransaction.commit();
+                    leftFrameLayout.setVisibility(View.VISIBLE);
+                    gmailFragmentNotShowing = false;
+                } else if(!gmailFragmentNotShowing){
+                    leftFrameLayout.setVisibility(View.GONE);
+                    gmailFragmentNotShowing = true;
+                }
             }
         });
 
@@ -122,28 +144,16 @@ public class MainActivity extends AppCompatActivity {
                 if (leftMainMenuNotShowing){
                     wikiPediaButton.setVisibility(View.VISIBLE);
                     gmailButton.setVisibility(View.VISIBLE);
-                    leftCloseButton.setVisibility(View.VISIBLE);
                     leftMainMenuNotShowing = false;
                 }
                 else if (!leftMainMenuNotShowing){
                     wikiPediaButton.setVisibility(View.GONE);
                     gmailButton.setVisibility(View.GONE);
-                    leftCloseButton.setVisibility(View.GONE);
                     leftMainMenuNotShowing = true;
                 }
             }
         });
 
-        leftCloseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wikiPediaButton.setVisibility(View.GONE);
-                gmailButton.setVisibility(View.GONE);
-                leftCloseButton.setVisibility(View.GONE);
-                leftFrameLayout.setVisibility(View.GONE);
-                leftMainMenuNotShowing = true;
-            }
-        });
 
         rightMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,28 +161,16 @@ public class MainActivity extends AppCompatActivity {
                 if (rightMainMenuNotShowing){
                     youTubeButton.setVisibility(View.VISIBLE);
                     mapsButton.setVisibility(View.VISIBLE);
-                    rightCloseButton.setVisibility(View.VISIBLE);
                     rightMainMenuNotShowing = false;
                 }
                 else if (!rightMainMenuNotShowing){
                     youTubeButton.setVisibility(View.GONE);
                     mapsButton.setVisibility(View.GONE);
-                    rightCloseButton.setVisibility(View.GONE);
                     rightMainMenuNotShowing = true;
                 }
             }
         });
 
-        rightCloseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                youTubeButton.setVisibility(View.GONE);
-                mapsButton.setVisibility(View.GONE);
-                rightCloseButton.setVisibility(View.GONE);
-                rightFrameLayout.setVisibility(View.GONE);
-                rightMainMenuNotShowing = true;
-            }
-        });
 
     }
 

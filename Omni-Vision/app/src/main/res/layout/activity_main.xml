@@ -64,16 +64,17 @@
             android:textColor="@android:color/white"/>
 
         <Button
-            android:id="@+id/leftCloseButton"
+            android:id="@+id/customButton"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:layout_toRightOf="@+id/gmailButton"
             android:background="@android:color/holo_blue_dark"
             android:padding="5dp"
-            android:text="Close"
+            android:text="Custom"
             android:alpha="0.5"
             android:textColor="@android:color/white"/>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -88,15 +89,6 @@
         android:alpha="0.5"
         android:textColor="@android:color/white">
 
-        <Button
-            android:id="@+id/rightCloseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/holo_blue_dark"
-            android:text="close"
-            android:alpha="0.5"
-            android:textColor="@android:color/white"/>
 
         <Button
             android:id="@+id/mapsButton"

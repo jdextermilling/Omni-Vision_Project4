@@ -18,6 +18,8 @@ public class WikiPediaWebViewFragment extends Fragment {
     final static String wikiPediaURL = "https://en.wikipedia.org/wiki/Main_Page";
     String myUrl;
 
+    private Bundle webViewBundle;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +50,18 @@ public class WikiPediaWebViewFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
+        if (webViewBundle != null)
+        {
+            myWebView.restoreState(webViewBundle);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        webViewBundle = new Bundle();
+        myWebView.saveState(webViewBundle);
     }
 
 }
