@@ -97,7 +97,7 @@
             android:layout_marginLeft="57dp"
             android:background="@android:color/holo_orange_dark"
             android:alpha="0.5"
-            android:layout_toRightOf="@+id/customWebViewEditText"
+            android:layout_toRightOf="@id/customWebViewEditText"
             android:layout_below="@+id/customButton"
             android:text="Submitt"
             android:textColor="@android:color/white"/>

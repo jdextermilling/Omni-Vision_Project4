@@ -1,16 +1,13 @@
 package com.example.omni_vision;
 
-import android.app.FragmentManager;
 import android.hardware.Camera;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -19,6 +16,7 @@ import android.widget.Toast;
 
 /**
  * TODO:
+ * +) Move declarations and instantiations of fragments up to improve performance.
  * 1) Set animations for main buttons - change "Web" and "Media" to "<--" and "-->".
  * 2) Set haptic feedback for buttons (will work only on some devices).
  */
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     boolean gmailFragmentNotShowing = true;
     boolean customFragmentNotShowing = true;
     FrameLayout leftFrameLayout, rightFrameLayout;
+
 
 
 
@@ -107,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         rightFrameLayout.setVisibility(View.GONE);
 
 
+
+
         /**
          * Left sub-Main Button click-listeners and behaviors
          */
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
+
                     fragmentTransaction.add(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
@@ -135,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // some button
+
 
         gmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,8 +169,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(customFragmentNotShowing) {
+
+
                     urlSubmittButton.setVisibility(View.VISIBLE);
                     customWebViewEditText.setVisibility(View.VISIBLE);
+                    CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
+
+                    android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
+
+                    Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
+                    fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
+                    fragmentTransaction.commit();
+                    //customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
+
+
+                    leftFrameLayout.setVisibility(View.VISIBLE);
                     customButton.animate().rotation(360);
                     customFragmentNotShowing = false;
                 } else if(!customFragmentNotShowing){
@@ -181,24 +200,21 @@ public class MainActivity extends AppCompatActivity {
         urlSubmittButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
 
                 CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
 
-                customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
+                android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
+
+                Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
                 fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
                 fragmentTransaction.commit();
-
-//                String customULRL;
-//
-//                Bundle bundle = new Bundle();
-//                customULRL = customWebViewEditText.getText().toString();
-//                bundle.putString("customURL", "From Activity");
-//
-//                customWebViewFragment.setArguments(bundle);
+                customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
 
                 leftFrameLayout.setVisibility(View.VISIBLE);
+
+
+                urlSubmittButton.animate().rotation(360);
                 Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
                 toast.show();
             }
