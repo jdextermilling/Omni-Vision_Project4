@@ -17,6 +17,13 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
+/**
+ * TODO:
+ * 1) Set animations for main buttons - change "Web" and "Media" to "<--" and "-->".
+ * 2) Set haptic feedback for buttons (will work only on some devices).
+ */
+
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -113,12 +120,17 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.add(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
+                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                    toast.show();
                     customWebViewEditText.setVisibility(View.GONE);
                     urlSubmittButton.setVisibility(View.GONE);
+                    wikiPediaButton.animate().rotation(360);
                     wikiPediaFragmentNotShowing = false;
                 } else if(!wikiPediaFragmentNotShowing){
                     leftFrameLayout.setVisibility(View.GONE);
+                    wikiPediaButton.animate().rotation(720);
                     wikiPediaFragmentNotShowing = true;
+
 
                 }
             }
@@ -134,11 +146,15 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.add(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
+                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                    toast.show();
                     customWebViewEditText.setVisibility(View.GONE);
                     urlSubmittButton.setVisibility(View.GONE);
+                    gmailButton.animate().rotation(360);
                     gmailFragmentNotShowing = false;
                 } else if(!gmailFragmentNotShowing){
                     leftFrameLayout.setVisibility(View.GONE);
+                    gmailButton.animate().rotation(720);
                     gmailFragmentNotShowing = true;
                 }
             }
@@ -150,11 +166,13 @@ public class MainActivity extends AppCompatActivity {
                 if(customFragmentNotShowing) {
                     urlSubmittButton.setVisibility(View.VISIBLE);
                     customWebViewEditText.setVisibility(View.VISIBLE);
+                    customButton.animate().rotation(360);
                     customFragmentNotShowing = false;
                 } else if(!customFragmentNotShowing){
                     urlSubmittButton.setVisibility(View.GONE);
                     customWebViewEditText.setVisibility(View.GONE);
                     leftFrameLayout.setVisibility(View.GONE);
+                    customButton.animate().rotation(720);
                     customFragmentNotShowing = true;
                 }
             }
@@ -181,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
 //                customWebViewFragment.setArguments(bundle);
 
                 leftFrameLayout.setVisibility(View.VISIBLE);
+                Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -195,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
                     wikiPediaButton.setVisibility(View.VISIBLE);
                     gmailButton.setVisibility(View.VISIBLE);
                     customButton.setVisibility(View.VISIBLE);
+                    leftMainButton.setHapticFeedbackEnabled(true);
+                    leftMainButton.animate().rotation(360);
+
                     leftMainMenuNotShowing = false;
                 }
                 else if (!leftMainMenuNotShowing){
@@ -203,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     customButton.setVisibility(View.GONE);
                     customWebViewEditText.setVisibility(View.GONE);
                     urlSubmittButton.setVisibility(View.GONE);
+                    leftMainButton.animate().rotation(720);
                     leftMainMenuNotShowing = true;
                 }
             }
@@ -214,11 +238,13 @@ public class MainActivity extends AppCompatActivity {
                 if (rightMainMenuNotShowing){
                     youTubeButton.setVisibility(View.VISIBLE);
                     mapsButton.setVisibility(View.VISIBLE);
+                    rightMainButton.animate().rotation(360);
                     rightMainMenuNotShowing = false;
                 }
                 else if (!rightMainMenuNotShowing){
                     youTubeButton.setVisibility(View.GONE);
                     mapsButton.setVisibility(View.GONE);
+                    rightMainButton.animate().rotation(720);
                     rightMainMenuNotShowing = true;
                 }
             }

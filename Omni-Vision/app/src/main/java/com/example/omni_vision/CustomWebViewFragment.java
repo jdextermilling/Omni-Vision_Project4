@@ -16,7 +16,7 @@ import android.widget.ListView;
 public class CustomWebViewFragment extends Fragment {
 
     WebView myWebView;
-    String customURL = "http://espn.go.com/"; // update to editText input
+    String customURL;
     String myUrl;
 
     private Bundle webViewBundle;

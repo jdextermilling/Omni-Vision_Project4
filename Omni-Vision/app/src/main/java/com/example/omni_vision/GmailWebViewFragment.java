@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
 public class GmailWebViewFragment extends Fragment {
 
     WebView myWebView;
-    final static String wikiPediaURL = "https://accounts.google.com/ServiceLogin?" +
+    String wikiPediaURL = "https://accounts.google.com/ServiceLogin?" +
             "service=mail&continue=https://mail.google.com/mail/#identifier";
     String myUrl;
 

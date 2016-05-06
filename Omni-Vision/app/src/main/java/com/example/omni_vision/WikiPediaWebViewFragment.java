@@ -15,7 +15,7 @@ import android.webkit.WebViewClient;
 public class WikiPediaWebViewFragment extends Fragment {
 
     WebView myWebView;
-    final static String wikiPediaURL = "https://en.wikipedia.org/wiki/Main_Page";
+    String wikiPediaURL = "https://en.wikipedia.org/wiki/Main_Page";
     String myUrl;
 
     private Bundle webViewBundle;
@@ -35,7 +35,12 @@ public class WikiPediaWebViewFragment extends Fragment {
         myWebView.loadUrl(myUrl);
 
         return view;
+
+
+
     }
+
+
 
     private class MyWebViewClient extends WebViewClient {
         @Override
