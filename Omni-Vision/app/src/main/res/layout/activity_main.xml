@@ -36,8 +36,8 @@
             android:background="@android:color/holo_blue_dark"
             android:padding="5dp"
             android:alpha="0.5"
-            android:text="Left"
-            android:textColor="@android:color/white"/>
+            android:text="Web"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/wikiPediaButton"
@@ -62,6 +62,46 @@
             android:text="GMAIL"
             android:alpha="0.5"
             android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/customButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/gmailButton"
+            android:background="@android:color/holo_blue_dark"
+            android:padding="5dp"
+            android:text="Custom"
+            android:alpha="0.5"
+            android:textColor="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/customWebViewEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Web Address"
+            android:padding="3dp"
+            android:layout_below="@+id/customButton"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="100dp"/>
+
+        <Button
+            android:id="@+id/urlSubmittButton"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="57dp"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:layout_toRightOf="@id/customWebViewEditText"
+            android:layout_below="@+id/customButton"
+            android:text="Submitt"
+            android:textColor="@android:color/white"/>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -75,6 +115,7 @@
         android:orientation="horizontal"
         android:alpha="0.5"
         android:textColor="@android:color/white">
+
 
         <Button
             android:id="@+id/mapsButton"
@@ -103,23 +144,24 @@
             android:layout_margin="5dp"
             android:layout_toLeftOf="@+id/rightMainButton"
             android:background="@android:color/holo_blue_dark"
-            android:text="Right"
+            android:text="Media"
             android:alpha="0.5"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/leftMainButtonFrame">
 
         <FrameLayout
-            android:id="@+id/leftFrameLauout"
+            android:id="@+id/leftFrameLayout"
             android:layout_width="350dp"
             android:layout_height="450dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="40dp"
+
+
             android:layout_marginLeft="20dp"
             android:background="@android:color/holo_red_dark"
             android:alpha="0.5">
@@ -129,9 +171,9 @@
             android:id="@+id/rightFrameLayout"
             android:layout_width="350dp"
             android:layout_height="450dp"
-            android:layout_alignParentBottom="true"
+
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="40dp"
+
             android:layout_marginRight="20dp"
             android:background="@android:color/holo_red_dark"
             android:alpha="0.5">
