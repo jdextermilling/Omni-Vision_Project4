@@ -138,9 +138,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // some button
-
-
         gmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,20 +166,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(customFragmentNotShowing) {
-
-
                     urlSubmittButton.setVisibility(View.VISIBLE);
                     customWebViewEditText.setVisibility(View.VISIBLE);
                     CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
-
                     android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
-
                     Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
                     fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
                     fragmentTransaction.commit();
                     //customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
-
 
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     customButton.animate().rotation(360);
@@ -200,20 +192,14 @@ public class MainActivity extends AppCompatActivity {
         urlSubmittButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
-
                 android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
-
                 Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
                 fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
                 fragmentTransaction.commit();
                 customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
-
                 leftFrameLayout.setVisibility(View.VISIBLE);
-
-
                 urlSubmittButton.animate().rotation(360);
                 Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
                 toast.show();
@@ -233,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
                     customButton.setVisibility(View.VISIBLE);
                     leftMainButton.setHapticFeedbackEnabled(true);
                     leftMainButton.animate().rotation(360);
-
                     leftMainMenuNotShowing = false;
                 }
                 else if (!leftMainMenuNotShowing){
