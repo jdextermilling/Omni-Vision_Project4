@@ -38,13 +38,8 @@ public class WikiPediaWebViewFragment extends Fragment {
         myWebView = (WebView) view.findViewById(R.id.wikiPediaWebView);
         sharedPreferences = getContext().getSharedPreferences("countPrefOne", Context.MODE_PRIVATE);
 
-
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new MyWebViewClient());
-
-
-
-        //runWebView();
 
         myUrl = sharedPreferences.getString(CURRENT_URL, null);
 
@@ -57,28 +52,6 @@ public class WikiPediaWebViewFragment extends Fragment {
 
     }
 
-    public void runWebView(){
-        if (myUrl == null) {
-            myUrl = wikiPediaURL;
-            myWebView.loadUrl(myUrl);
-        } else{
-            myUrl = sharedPreferences.getString(CURRENT_URL, null);
-            myWebView.loadUrl(myUrl);
-        }
-    }
-
-    /**
-     *
-     * @param newHome if new home is set to null the WebView will reset itself to display the Wikipedia homepage.
-     */
-    public void setNewWebViewHome(@Nullable String newHome) {
-        Log.w(TAG, "Home url was set to null by: setNewWebViewHome()");
-        sharedPreferences.edit().putString(CURRENT_URL, newHome).apply();
-    }
-
-    public void resetWebView(){
-        sharedPreferences.edit().putString(CURRENT_URL, null).apply();
-    }
 
     private class MyWebViewClient extends WebViewClient {
         @Override

@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     Button urlSubmittButton;
     EditText customWebViewEditText;
     Button slackButton;
+    Button slackSubmittButton;
+    EditText slackEditText;
     boolean leftMainMenuNotShowing = true;
     boolean rightMainMenuNotShowing = true;
     boolean wikiPediaFragmentNotShowing = true;
@@ -106,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
         urlSubmittButton.setVisibility(View.GONE);
         slackButton = (Button) findViewById(R.id.slackButton);
         slackButton.setVisibility(View.GONE);
+        slackSubmittButton = (Button) findViewById(R.id.slackSubmittButton);
+        slackSubmittButton.setVisibility(View.GONE);
+        slackEditText = (EditText) findViewById(R.id.slackEditText);
+        slackEditText.setVisibility(View.GONE);
 
 
         /**
@@ -129,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
-
                     fragmentTransaction.add(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
@@ -185,8 +190,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
                     fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
                     fragmentTransaction.commit();
-                    //customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
-
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     customButton.animate().rotation(360);
                     customFragmentNotShowing = false;
@@ -206,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
                 CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
                 android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
-                Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
                 fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
                 fragmentTransaction.commit();
                 customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
@@ -247,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
                    // startActivity(YouTubeStandalonePlayer.createVideoIntent(MainActivity.this, "DEVELOPER_KEY", "YRrjDTdq8MA", 0, true, true));
 
                     Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
-
                     youTubeButton.animate().rotation(360);
                     youtubeFragmentNotShowing = false;
                 } else if(!youtubeFragmentNotShowing){
@@ -265,12 +266,32 @@ public class MainActivity extends AppCompatActivity {
                     rightFrameLayout.setVisibility(View.VISIBLE);
                     Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
                     slackButton.animate().rotation(360);
+                    slackEditText.setVisibility(View.VISIBLE);
+                    slackSubmittButton.setVisibility(View.VISIBLE);
                     slackFragmentNotShowing = false;
                 } else if(!slackFragmentNotShowing){
                     rightFrameLayout.setVisibility(View.GONE);
+                    slackEditText.setVisibility(View.GONE);
+                    slackSubmittButton.setVisibility(View.GONE);
                     slackButton.animate().rotation(720);
                     slackFragmentNotShowing = true;
                 }
+            }
+        });
+
+        slackSubmittButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SlackFragment slackFragment = new SlackFragment();
+                android.support.v4.app.FragmentManager fragmentManager5 = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager5.beginTransaction();
+                fragmentTransaction.add(R.id.rightFrameLayout, slackFragment);
+                fragmentTransaction.commit();
+                slackFragment.setmyMessage(slackEditText.getText().toString());
+                rightFrameLayout.setVisibility(View.VISIBLE);
+                slackSubmittButton.animate().rotation(360);
+                Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -333,6 +354,8 @@ public class MainActivity extends AppCompatActivity {
                     youTubeButton.setVisibility(View.GONE);
                     mapsButton.setVisibility(View.GONE);
                     slackButton.setVisibility(View.GONE);
+                    slackEditText.setVisibility(View.GONE);
+                    slackSubmittButton.setVisibility(View.GONE);
                     rightMainButton.animate().rotation(720);
                     rightMainMenuNotShowing = true;
                 }

@@ -24,10 +24,8 @@ public class CustomWebViewFragment extends Fragment {
 
     SharedPreferences sharedPreferences3;
 
-    private Bundle webViewBundle;
 
     public void setCustomURL(String customURL){
-        Log.i("CustomWebViewFRagment", "setting custom URL to " +customURL);
         this.customURL = "http://www." +customURL;
     }
 
@@ -35,14 +33,13 @@ public class CustomWebViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.wikipedia_webview, container, false);
-        myWebView = (WebView) view.findViewById(R.id.wikiPediaWebView);
+        View view = inflater.inflate(R.layout.custom_webview, container, false);
+        myWebView = (WebView) view.findViewById(R.id.customWebView);
 
         sharedPreferences3 = getContext().getSharedPreferences("countPrefThree", Context.MODE_PRIVATE);
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new MyWebViewClient());
 
-//        myUrl = customURL;
         myUrl = sharedPreferences3.getString(CURRENT_URL, null);
 
         Log.i("CustomWebView", " myURL is " + myUrl);
@@ -69,22 +66,5 @@ public class CustomWebViewFragment extends Fragment {
 
         }
     }
-//
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        setRetainInstance(true);
-//        if (webViewBundle != null)
-//        {
-//            myWebView.restoreState(webViewBundle);
-//        }
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//
-//        webViewBundle = new Bundle();
-//        myWebView.saveState(webViewBundle);
-//    }
+
 }

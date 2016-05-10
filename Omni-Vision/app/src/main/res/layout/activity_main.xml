@@ -105,9 +105,49 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_below="@+id/rightMainButtonFrame"
+        android:layout_marginRight="20dp"
+        android:alpha="0.5">
+
+        <EditText
+            android:id="@+id/slackEditText"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter a Message"
+            android:padding="3dp"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="2dp"
+            />
+
+        <Button
+            android:id="@+id/slackSubmittButton"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="57dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:text="Submitt"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/rightMainButtonFrame"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -125,7 +165,7 @@
             android:background="@android:color/holo_blue_dark"
             android:text="Maps"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/slackButton"
@@ -133,9 +173,9 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@android:color/holo_blue_dark"
-            android:text="FaceBook"
+            android:text="Slack"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/youTubeButton"
@@ -145,18 +185,20 @@
             android:background="@android:color/holo_blue_dark"
             android:text="YouTube"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/rightMainButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:layout_toLeftOf="@+id/rightMainButton"
             android:background="@android:color/holo_blue_dark"
             android:text="Media"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
+
+
+
     </LinearLayout>
 
     <RelativeLayout
@@ -181,9 +223,7 @@
             android:id="@+id/rightFrameLayout"
             android:layout_width="350dp"
             android:layout_height="450dp"
-
             android:layout_alignParentRight="true"
-
             android:layout_marginRight="20dp"
             android:background="@android:color/holo_red_dark"
             android:alpha="0.5">
