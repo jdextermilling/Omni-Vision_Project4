@@ -13,9 +13,14 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
+
 
 /**
  * TODO:
+ *
+ * ++ Obfusicate API Key from Cofig class.
+ *
  * +) Move declarations and instantiations of fragments up to improve performance.
  * 1) Set animations for main buttons - change "Web" and "Media" to "<--" and "-->".
  * 2) Set haptic feedback for buttons (will work only on some devices).
@@ -45,11 +50,15 @@ public class MainActivity extends AppCompatActivity {
     Button customButton;
     Button urlSubmittButton;
     EditText customWebViewEditText;
+    Button slackButton;
     boolean leftMainMenuNotShowing = true;
     boolean rightMainMenuNotShowing = true;
     boolean wikiPediaFragmentNotShowing = true;
     boolean gmailFragmentNotShowing = true;
     boolean customFragmentNotShowing = true;
+    boolean youtubeFragmentNotShowing = true;
+    boolean slackFragmentNotShowing = true;
+    boolean mapsFragmentNotShowing = true;
     FrameLayout leftFrameLayout, rightFrameLayout;
 
 
@@ -64,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
          * Setting up the camera.
          */
         preview = (SurfaceView) findViewById(R.id.surfaceview);
+//        preview.setZOrderMediaOverlay(false);
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
          * Getting the main menu button on top (in front of) camera preview
          */
         leftMainButton = (Button) findViewById(R.id.leftMainButton);
+        rightMainButton = (Button) findViewById(R.id.rightMainButton);
         leftMainButton.bringToFront();
         preview.invalidate();
 
@@ -83,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         wikiPediaButton.setVisibility(View.GONE);
         gmailButton = (Button) findViewById(R.id.gmailButton);
         gmailButton.setVisibility(View.GONE);
-        rightMainButton = (Button) findViewById(R.id.rightMainButton);
         youTubeButton = (Button) findViewById(R.id.youTubeButton);
         youTubeButton.setVisibility(View.GONE);
         mapsButton = (Button) findViewById(R.id.mapsButton);
@@ -94,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
         customWebViewEditText.setVisibility(View.GONE);
         urlSubmittButton = (Button) findViewById(R.id.urlSubmittButton);
         urlSubmittButton.setVisibility(View.GONE);
-
+        slackButton = (Button) findViewById(R.id.slackButton);
+        slackButton.setVisibility(View.GONE);
 
 
         /**
@@ -102,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
          */
         leftFrameLayout = (FrameLayout) findViewById(R.id.leftFrameLayout);
         rightFrameLayout = (FrameLayout) findViewById(R.id.rightFrameLayout);
+        rightFrameLayout.bringToFront();
+
         leftFrameLayout.setVisibility(View.GONE);
         rightFrameLayout.setVisibility(View.GONE);
-
-
 
 
         /**
@@ -206,9 +217,84 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Right sub-Main Button click-listeners and behaviors -------------------------------------
+         */
+
+        youTubeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(youtubeFragmentNotShowing) {
+
+                    android.support.v4.app.FragmentManager fragmentManager4 = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager4.beginTransaction();
+                    YouTubeWebView fragment = new YouTubeWebView();
+                    fragmentTransaction.add(R.id.rightFrameLayout, fragment);
+                    fragmentTransaction.commit();
+                    rightFrameLayout.setVisibility(View.VISIBLE);
+//
+//                    YouTubeFragment fragment = new YouTubeFragment();
+//                    Bundle arbBundle = new Bundle();
+//                    arbBundle.putString("VIDEO_URL", "YRrjDTdq8MA");
+//                    fragment.setArguments(arbBundle);
+//                    android.support.v4.app.FragmentManager fragmentManager4 = getSupportFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager4.beginTransaction();
+//
+//                    fragmentTransaction.add(R.id.rightFrameLayout, fragment);
+//                    fragmentTransaction.commit();
+//                    rightFrameLayout.setVisibility(View.VISIBLE);
+//                    preview.setVisibility(View.GONE);
+                   // startActivity(YouTubeStandalonePlayer.createVideoIntent(MainActivity.this, "DEVELOPER_KEY", "YRrjDTdq8MA", 0, true, true));
+
+                    Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
+
+                    youTubeButton.animate().rotation(360);
+                    youtubeFragmentNotShowing = false;
+                } else if(!youtubeFragmentNotShowing){
+                    rightFrameLayout.setVisibility(View.GONE);
+                    youTubeButton.animate().rotation(720);
+                    youtubeFragmentNotShowing = true;
+                }
+            }
+        });
+
+        slackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(slackFragmentNotShowing){
+                    rightFrameLayout.setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
+                    slackButton.animate().rotation(360);
+                    slackFragmentNotShowing = false;
+                } else if(!slackFragmentNotShowing){
+                    rightFrameLayout.setVisibility(View.GONE);
+                    slackButton.animate().rotation(720);
+                    slackFragmentNotShowing = true;
+                }
+            }
+        });
+
+        mapsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mapsFragmentNotShowing){
+                    rightFrameLayout.setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "Coming Soon.", Toast.LENGTH_SHORT).show();
+                    mapsButton.animate().rotation(360);
+                    mapsFragmentNotShowing = false;
+                } else if(!mapsFragmentNotShowing){
+                    rightFrameLayout.setVisibility(View.GONE);
+                    mapsButton.animate().rotation(720);
+                    mapsFragmentNotShowing = true;
+                }
+            }
+        });
+
+
+
 
         /**
-         * Main menu clickListeners and behaviors.
+         * Main menu clickListeners and behaviors. -------------------------------------------------
          */
         leftMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,12 +325,14 @@ public class MainActivity extends AppCompatActivity {
                 if (rightMainMenuNotShowing){
                     youTubeButton.setVisibility(View.VISIBLE);
                     mapsButton.setVisibility(View.VISIBLE);
+                    slackButton.setVisibility(View.VISIBLE);
                     rightMainButton.animate().rotation(360);
                     rightMainMenuNotShowing = false;
                 }
                 else if (!rightMainMenuNotShowing){
                     youTubeButton.setVisibility(View.GONE);
                     mapsButton.setVisibility(View.GONE);
+                    slackButton.setVisibility(View.GONE);
                     rightMainButton.animate().rotation(720);
                     rightMainMenuNotShowing = true;
                 }
