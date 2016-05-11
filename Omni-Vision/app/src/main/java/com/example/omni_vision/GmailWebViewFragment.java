@@ -45,15 +45,6 @@ public class GmailWebViewFragment extends Fragment {
         myWebView.loadUrl(myUrl);
 
 
-//        myUrl = sharedPreferences2.getString(CURRENT_URL, null);
-//
-//        if (myUrl == null) {
-//            myUrl = gmailURL;
-//        }
-//        myWebView.loadUrl(myUrl);
-
-
-
         return view;
     }
 

@@ -11,6 +11,6 @@ import retrofit2.http.Path;
  */
 public interface SlackAPIService {
 
-    @POST("")
+    @POST("B17M3E46M/DiP0k4QOett4tzCXVjt544OD")
     Call<SlackMessage> sendMessage(@Body SlackMessage slackMessage);
 }

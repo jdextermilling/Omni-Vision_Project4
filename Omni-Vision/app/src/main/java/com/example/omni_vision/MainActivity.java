@@ -265,6 +265,11 @@ public class MainActivity extends AppCompatActivity {
                 if(slackFragmentNotShowing){
                     rightFrameLayout.setVisibility(View.VISIBLE);
                     Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
+                    SlackFragment slackFragment = new SlackFragment();
+                    android.support.v4.app.FragmentManager fragmentManager5 = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager5.beginTransaction();
+                    fragmentTransaction.add(R.id.rightFrameLayout, slackFragment);
+                    fragmentTransaction.commit();
                     slackButton.animate().rotation(360);
                     slackEditText.setVisibility(View.VISIBLE);
                     slackSubmittButton.setVisibility(View.VISIBLE);
