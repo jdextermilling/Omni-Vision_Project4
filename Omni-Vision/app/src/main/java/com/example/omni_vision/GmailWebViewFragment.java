@@ -17,8 +17,7 @@ import android.webkit.WebViewClient;
 public class GmailWebViewFragment extends Fragment {
 
     private static final String CURRENT_URL = "current_gmail_url";
-    //private static final String TAG = WikiPediaWebViewFragment.class.getSimpleName();
-     SharedPreferences sharedPreferences2;
+    SharedPreferences sharedPreferences2;
 
     WebView myWebView;
     String gmailURL = "https://accounts.google.com/ServiceLogin?" +

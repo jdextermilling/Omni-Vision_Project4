@@ -31,6 +31,7 @@ import retrofit2.http.POST;
 
 public class SlackFragment extends Fragment{
 
+    private static final String CURRENT_MESSAGELIST = "current_messagelist";
     SharedPreferences sharedPreferences5;
 
     SlackAPIService slackAPIService;
@@ -54,15 +55,18 @@ public class SlackFragment extends Fragment{
         View view = inflater.inflate(R.layout.slack_fragemnt, container, false);
 
         slackListView = (ListView) view.findViewById(R.id.slack_listView);
-        messageList = new ArrayList<>();
+        messageList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, messageList);
         slackListView.setAdapter(adapter);
-        
+
         messageList.add(initialMessage);
         messageList.add(myMessage);
         adapter.notifyDataSetChanged();
 
+        //messageList = sharedPreferences5.get(CURRENT_MESSAGELIST, null);
+
         sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
+
 
 
 
@@ -92,9 +96,6 @@ public class SlackFragment extends Fragment{
         }
 
 
-
-
-
         return view;
     }
 
@@ -102,7 +103,9 @@ public class SlackFragment extends Fragment{
         this.myMessage = myMessage;
     }
 
-
+//    public ArrayList MessageList(){
+//        this.messageList =
+//    }
 
 
 }

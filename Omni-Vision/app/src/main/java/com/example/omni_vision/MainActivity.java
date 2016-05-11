@@ -297,7 +297,8 @@ public class MainActivity extends AppCompatActivity {
                 slackFragment.setmyMessage(slackEditText.getText().toString());
                 rightFrameLayout.setVisibility(View.VISIBLE);
                 slackSubmittButton.animate().rotation(360);
-                Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                slackEditText.getText().clear();
+                Toast toast = Toast.makeText(MainActivity.this, "Message posted", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
