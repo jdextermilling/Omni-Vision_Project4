@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
-
 
 /**
  * TODO:
@@ -62,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     boolean slackFragmentNotShowing = true;
     boolean mapsFragmentNotShowing = true;
     FrameLayout leftFrameLayout, rightFrameLayout;
+
+    SlackFragment slackFragment;
+
 
 
 
@@ -264,9 +265,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(slackFragmentNotShowing){
                     rightFrameLayout.setVisibility(View.VISIBLE);
-                    Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Enter a message to post.", Toast.LENGTH_SHORT).show();
 
-                    SlackFragment slackFragment = new SlackFragment();
+                    slackFragment = new SlackFragment();
                     android.support.v4.app.FragmentManager fragmentManager5 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager5.beginTransaction();
                     fragmentTransaction.add(R.id.rightFrameLayout, slackFragment);
@@ -289,17 +290,10 @@ public class MainActivity extends AppCompatActivity {
         slackSubmittButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SlackFragment slackFragment = new SlackFragment();
-                android.support.v4.app.FragmentManager fragmentManager5 = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager5.beginTransaction();
-                fragmentTransaction.add(R.id.rightFrameLayout, slackFragment);
-                fragmentTransaction.commit();
-                slackFragment.setmyMessage(slackEditText.getText().toString());
-                rightFrameLayout.setVisibility(View.VISIBLE);
+                    slackFragment.setMyMessage(slackEditText.getText().toString());
+
                 slackSubmittButton.animate().rotation(360);
                 slackEditText.getText().clear();
-                Toast toast = Toast.makeText(MainActivity.this, "Message posted", Toast.LENGTH_SHORT);
-                toast.show();
             }
         });
 

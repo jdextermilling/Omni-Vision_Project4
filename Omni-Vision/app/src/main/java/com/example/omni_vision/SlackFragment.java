@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,25 +30,22 @@ import retrofit2.http.POST;
 
 // Incoming webhook endpoint = https://hooks.slack.com/services/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
 
-public class SlackFragment extends Fragment{
+public class SlackFragment extends Fragment {
 
     private static final String CURRENT_MESSAGELIST = "current_messagelist";
     SharedPreferences sharedPreferences5;
 
     SlackAPIService slackAPIService;
 
-    String myMessage;
     String initialMessage = "Send a message to Funny Biz~";
     ArrayList<String> messageList;
     ArrayAdapter adapter;
     ListView slackListView;
 
     public static final String BASE_URL = "https://hooks.slack.com/services/T0351JZQ0/";
-            //"B17M3E46M/DiP0k4QOett4tzCXVjt544OD";
+    //"B17M3E46M/DiP0k4QOett4tzCXVjt544OD";
 
     Retrofit retrofit;
-
-
 
 
     @Override
@@ -55,57 +53,55 @@ public class SlackFragment extends Fragment{
         View view = inflater.inflate(R.layout.slack_fragemnt, container, false);
 
         slackListView = (ListView) view.findViewById(R.id.slack_listView);
-        messageList = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, messageList);
+        messageList = new ArrayList<>();
+        messageList.add(initialMessage);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);
         slackListView.setAdapter(adapter);
 
-        messageList.add(initialMessage);
-        messageList.add(myMessage);
-        adapter.notifyDataSetChanged();
 
         //messageList = sharedPreferences5.get(CURRENT_MESSAGELIST, null);
 
         sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
 
 
+//            Toast toast = Toast.makeText(getContext(), "Enter a message to post.", Toast.LENGTH_SHORT).show();
 
 
-        if(myMessage == null){
-            Toast toast = Toast.makeText(getContext(), "Enter a message to post.", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-            slackAPIService = retrofit.create(SlackAPIService.class);
-            Call<SlackMessage> toSend = slackAPIService.sendMessage(new SlackMessage(myMessage));
-            toSend.enqueue(new Callback<SlackMessage>() {
-                @Override
-                public void onResponse(Call<SlackMessage> call, Response<SlackMessage> response) {
-                    Log.i("SlackFragment", "Message posted" + myMessage);
-                }
-
-                @Override
-                public void onFailure(Call<SlackMessage> call, Throwable t) {
-                    Log.i("SlackFragment", "Message failed to post" + myMessage);
-                }
-            });
-
-        }
+        slackAPIService = retrofit.create(SlackAPIService.class);
 
 
         return view;
     }
 
-    public void setmyMessage(String myMessage){
-        this.myMessage = myMessage;
+    public void setMyMessage(final String myMessage) {
+        messageList.add(myMessage);
+        adapter.notifyDataSetChanged();
+
+        slackAPIService.sendMessage(new SlackMessage(myMessage))
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.i("SlackFragment", "Message posted: " + myMessage);
+                        Toast.makeText(getContext(), "Message posted", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        t.printStackTrace();
+                        Log.e("SlackFragment", "Message failed to post: " + myMessage);
+                        messageList.remove(myMessage);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
-//    public ArrayList MessageList(){
-//        this.messageList =
-//    }
+
 
 
 }

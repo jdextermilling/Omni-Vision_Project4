@@ -48,6 +48,10 @@ public class WikiPediaWebViewFragment extends Fragment {
         }
         myWebView.loadUrl(myUrl);
 
+
+//        myWebView.canGoBack();
+//        myWebView.canZoomIn();
+
         return view;
 
     }
