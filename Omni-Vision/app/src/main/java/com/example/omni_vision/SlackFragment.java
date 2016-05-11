@@ -54,14 +54,16 @@ public class SlackFragment extends Fragment{
         View view = inflater.inflate(R.layout.slack_fragemnt, container, false);
 
         slackListView = (ListView) view.findViewById(R.id.slack_listView);
-        messageList = new ArrayList();
+        messageList = new ArrayList<>();
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, messageList);
         slackListView.setAdapter(adapter);
+        
         messageList.add(initialMessage);
         messageList.add(myMessage);
         adapter.notifyDataSetChanged();
 
         sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
+
 
 
         if(myMessage == null){
