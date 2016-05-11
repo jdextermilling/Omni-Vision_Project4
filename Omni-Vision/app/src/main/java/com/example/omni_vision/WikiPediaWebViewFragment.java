@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class WikiPediaWebViewFragment extends Fragment {
     private static final String CURRENT_URL = "current_wiki_url";
     private static final String TAG = WikiPediaWebViewFragment.class.getSimpleName();
 
-    WebView myWebView;
+    public static WebView myWebView;
     String wikiPediaURL = "https://en.wikipedia.org/wiki/Main_Page";
     String myUrl = null;
     SharedPreferences sharedPreferences;
@@ -55,6 +56,7 @@ public class WikiPediaWebViewFragment extends Fragment {
         return view;
 
     }
+
 
 
     private class MyWebViewClient extends WebViewClient {

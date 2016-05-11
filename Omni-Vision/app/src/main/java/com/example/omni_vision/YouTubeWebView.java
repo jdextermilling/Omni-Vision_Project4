@@ -18,7 +18,7 @@ public class YouTubeWebView extends Fragment {
     private static final String CURRENT_URL = "current_youtube_url";
     SharedPreferences sharedPreferences4;
 
-    WebView myWebView;
+    public static WebView myWebView;
     String youTubeURL = "https://www.youtube.com/";
     String myUrl;
 

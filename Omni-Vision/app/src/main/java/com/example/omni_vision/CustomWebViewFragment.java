@@ -18,7 +18,7 @@ import android.widget.ListView;
 public class CustomWebViewFragment extends Fragment {
 
     private static final String CURRENT_URL = "current_custom_url";
-    WebView myWebView;
+    public static WebView myWebView;
     String customURL;
     String myUrl;
 

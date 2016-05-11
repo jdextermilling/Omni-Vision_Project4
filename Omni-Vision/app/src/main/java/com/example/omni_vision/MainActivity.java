@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.example.omni_vision.Unused.YouTubeFragment;
 
 
 /**
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
-                    fragmentTransaction.add(R.id.leftFrameLayout, fragment);
+                    fragmentTransaction.replace(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
@@ -162,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     android.support.v4.app.FragmentManager fragmentManager2 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
                     GmailWebViewFragment fragment = new GmailWebViewFragment();
-                    fragmentTransaction.add(R.id.leftFrameLayout, fragment);
+                    fragmentTransaction.replace(R.id.leftFrameLayout, fragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
@@ -189,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                     android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
                     Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
-                    fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
+                    fragmentTransaction.replace(R.id.leftFrameLayout, customWebViewFragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     customButton.animate().rotation(360);
@@ -210,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
                 android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
-                fragmentTransaction.add(R.id.leftFrameLayout, customWebViewFragment);
+                fragmentTransaction.replace(R.id.leftFrameLayout, customWebViewFragment);
                 fragmentTransaction.commit();
                 customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
                 leftFrameLayout.setVisibility(View.VISIBLE);
@@ -232,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                     android.support.v4.app.FragmentManager fragmentManager4 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager4.beginTransaction();
                     YouTubeWebView fragment = new YouTubeWebView();
-                    fragmentTransaction.add(R.id.rightFrameLayout, fragment);
+                    fragmentTransaction.replace(R.id.rightFrameLayout, fragment);
                     fragmentTransaction.commit();
                     rightFrameLayout.setVisibility(View.VISIBLE);
 //
@@ -266,13 +269,11 @@ public class MainActivity extends AppCompatActivity {
                 if(slackFragmentNotShowing){
                     rightFrameLayout.setVisibility(View.VISIBLE);
                     Toast.makeText(MainActivity.this, "Enter a message to post.", Toast.LENGTH_SHORT).show();
-
                     slackFragment = new SlackFragment();
                     android.support.v4.app.FragmentManager fragmentManager5 = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager5.beginTransaction();
-                    fragmentTransaction.add(R.id.rightFrameLayout, slackFragment);
+                    fragmentTransaction.replace(R.id.rightFrameLayout, slackFragment);
                     fragmentTransaction.commit();
-
                     slackButton.animate().rotation(360);
                     slackEditText.setVisibility(View.VISIBLE);
                     slackSubmittButton.setVisibility(View.VISIBLE);
@@ -290,8 +291,7 @@ public class MainActivity extends AppCompatActivity {
         slackSubmittButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    slackFragment.setMyMessage(slackEditText.getText().toString());
-
+                slackFragment.setMyMessage(slackEditText.getText().toString());
                 slackSubmittButton.animate().rotation(360);
                 slackEditText.getText().clear();
             }
@@ -301,19 +301,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mapsFragmentNotShowing){
-                    rightFrameLayout.setVisibility(View.VISIBLE);
                     Toast.makeText(MainActivity.this, "Coming Soon.", Toast.LENGTH_SHORT).show();
                     mapsButton.animate().rotation(360);
+                    rightFrameLayout.setVisibility(View.GONE);
                     mapsFragmentNotShowing = false;
                 } else if(!mapsFragmentNotShowing){
-                    rightFrameLayout.setVisibility(View.GONE);
                     mapsButton.animate().rotation(720);
                     mapsFragmentNotShowing = true;
                 }
             }
         });
-
-
 
 
         /**
@@ -371,6 +368,26 @@ public class MainActivity extends AppCompatActivity {
      *
      * ----------------Start Methods----------------------------------------------------------------
      */
+
+    @Override
+    public void onBackPressed() {
+        if (!wikiPediaFragmentNotShowing && WikiPediaWebViewFragment.myWebView.canGoBack()) {
+            WikiPediaWebViewFragment.myWebView.goBack();
+            Log.i("Main Activity", "Back button worked for Wiki");
+        } else if (!customFragmentNotShowing && CustomWebViewFragment.myWebView.canGoBack()) {
+            CustomWebViewFragment.myWebView.goBack();
+            Log.i("Main Activity", "Back button worked for Custom");
+        } else if (!gmailFragmentNotShowing && GmailWebViewFragment.myWebView.canGoBack()) {
+             GmailWebViewFragment.myWebView.goBack();
+        } else if (!youtubeFragmentNotShowing && YouTubeWebView.myWebView.canGoBack()) {
+            YouTubeWebView.myWebView.goBack();
+        }
+        else {
+            Log.i("Main Activity", "Non of the back buttons worked");
+            super.onBackPressed();
+        }
+    }
+
 
     @Override
     public void onResume() {

@@ -19,7 +19,7 @@ public class GmailWebViewFragment extends Fragment {
     private static final String CURRENT_URL = "current_gmail_url";
     SharedPreferences sharedPreferences2;
 
-    WebView myWebView;
+    public static WebView myWebView;
     String gmailURL = "https://accounts.google.com/ServiceLogin?" +
             "service=mail&continue=https://mail.google.com/mail/#identifier";
     String myUrl;

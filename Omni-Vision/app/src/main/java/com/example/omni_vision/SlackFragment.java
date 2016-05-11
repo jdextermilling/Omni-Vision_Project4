@@ -47,7 +47,6 @@ public class SlackFragment extends Fragment {
 
     Retrofit retrofit;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.slack_fragemnt, container, false);
@@ -59,12 +58,9 @@ public class SlackFragment extends Fragment {
         slackListView.setAdapter(adapter);
 
 
-        //messageList = sharedPreferences5.get(CURRENT_MESSAGELIST, null);
 
         sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
 
-
-//            Toast toast = Toast.makeText(getContext(), "Enter a message to post.", Toast.LENGTH_SHORT).show();
 
 
         retrofit = new Retrofit.Builder()
@@ -100,8 +96,5 @@ public class SlackFragment extends Fragment {
                     }
                 });
     }
-
-
-
 
 }
