@@ -2,13 +2,16 @@ package com.example.omni_vision;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -16,8 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
-
-import com.example.omni_vision.Unused.YouTubeFragment;
 
 
 /**
@@ -67,7 +68,14 @@ public class MainActivity extends AppCompatActivity {
     boolean mapsFragmentNotShowing = true;
     FrameLayout leftFrameLayout, rightFrameLayout;
 
-    SlackFragment slackFragment;
+
+    WikiPediaWebViewFragment wikiPediaWebViewFragment = new WikiPediaWebViewFragment();
+    SlackFragment slackFragment = new SlackFragment();
+    GmailWebViewFragment gmailWebViewFragment = new GmailWebViewFragment();
+    CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
+    YouTubeWebViewFragment youTubeWebView = new YouTubeWebViewFragment();
+
+    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
 
 
@@ -124,13 +132,24 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Setting up notifications(Status bar icon)
          */
-//        Notification notification = new Notification(R.drawable.eye, "Omni-Vision",
-//                System.currentTimeMillis());
-//        notification.flags |= Notification.FLAG_NO_CLEAR
-//                | Notification.FLAG_ONGOING_EVENT;
-//        NotificationManager notifier = (NotificationManager)
-//                getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//        notifier.notify(1, notification);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.small_eye)
+                        .setContentTitle("Omni-Vision")
+                        .setContentText("Click to return to app");
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(1, mBuilder.build());
 
 
         /**
@@ -151,10 +170,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(wikiPediaFragmentNotShowing) {
-                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    if (wikiPediaWebViewFragment == null) {
+                        wikiPediaWebViewFragment = new WikiPediaWebViewFragment();
+                    }
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    WikiPediaWebViewFragment fragment = new WikiPediaWebViewFragment();
-                    fragmentTransaction.replace(R.id.leftFrameLayout, fragment);
+                    fragmentTransaction.replace(R.id.leftFrameLayout, wikiPediaWebViewFragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
@@ -167,8 +187,6 @@ public class MainActivity extends AppCompatActivity {
                     leftFrameLayout.setVisibility(View.GONE);
                     wikiPediaButton.animate().rotation(720);
                     wikiPediaFragmentNotShowing = true;
-
-
                 }
             }
         });
@@ -177,10 +195,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(gmailFragmentNotShowing) {
-                    android.support.v4.app.FragmentManager fragmentManager2 = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
-                    GmailWebViewFragment fragment = new GmailWebViewFragment();
-                    fragmentTransaction.replace(R.id.leftFrameLayout, fragment);
+                    if (gmailWebViewFragment == null){
+                        gmailWebViewFragment = new GmailWebViewFragment();
+                    }
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.leftFrameLayout, gmailWebViewFragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
                     Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
@@ -201,11 +221,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(customFragmentNotShowing) {
+                    if (customWebViewFragment == null){
+                        customWebViewFragment = new CustomWebViewFragment();
+                    }
                     urlSubmittButton.setVisibility(View.VISIBLE);
                     customWebViewEditText.setVisibility(View.VISIBLE);
-                    CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
-                    android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     Log.i("MainActivity", "EditText is" + customWebViewEditText.getText().toString());
                     fragmentTransaction.replace(R.id.leftFrameLayout, customWebViewFragment);
                     fragmentTransaction.commit();
@@ -225,9 +247,11 @@ public class MainActivity extends AppCompatActivity {
         urlSubmittButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
-                android.support.v4.app.FragmentManager fragmentManager3 = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager3.beginTransaction();
+                if (customWebViewFragment == null) {
+                    customWebViewFragment= new CustomWebViewFragment();
+                }
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.leftFrameLayout, customWebViewFragment);
                 fragmentTransaction.commit();
                 customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
@@ -246,27 +270,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(youtubeFragmentNotShowing) {
-
-                    android.support.v4.app.FragmentManager fragmentManager4 = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager4.beginTransaction();
-                    YouTubeWebView fragment = new YouTubeWebView();
-                    fragmentTransaction.replace(R.id.rightFrameLayout, fragment);
+                    if (youTubeWebView == null) {
+                        youTubeWebView = new YouTubeWebViewFragment();
+                    }
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.rightFrameLayout, youTubeWebView);
                     fragmentTransaction.commit();
                     rightFrameLayout.setVisibility(View.VISIBLE);
-//
-//                    YouTubeFragment fragment = new YouTubeFragment();
-//                    Bundle arbBundle = new Bundle();
-//                    arbBundle.putString("VIDEO_URL", "YRrjDTdq8MA");
-//                    fragment.setArguments(arbBundle);
-//                    android.support.v4.app.FragmentManager fragmentManager4 = getSupportFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager4.beginTransaction();
-//
-//                    fragmentTransaction.add(R.id.rightFrameLayout, fragment);
-//                    fragmentTransaction.commit();
-//                    rightFrameLayout.setVisibility(View.VISIBLE);
-//                    preview.setVisibility(View.GONE);
-                   // startActivity(YouTubeStandalonePlayer.createVideoIntent(MainActivity.this, "DEVELOPER_KEY", "YRrjDTdq8MA", 0, true, true));
-
                     Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
                     youTubeButton.animate().rotation(360);
                     youtubeFragmentNotShowing = false;
@@ -281,12 +292,14 @@ public class MainActivity extends AppCompatActivity {
         slackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(slackFragmentNotShowing){
+                if (slackFragmentNotShowing){
+                    if (slackFragment == null) {
+                        slackFragment = new SlackFragment();
+                    }
                     rightFrameLayout.setVisibility(View.VISIBLE);
                     Toast.makeText(MainActivity.this, "Enter a message to post.", Toast.LENGTH_SHORT).show();
-                    slackFragment = new SlackFragment();
-                    android.support.v4.app.FragmentManager fragmentManager5 = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager5.beginTransaction();
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.rightFrameLayout, slackFragment);
                     fragmentTransaction.commit();
                     slackButton.animate().rotation(360);
@@ -394,8 +407,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Main Activity", "Back button worked for Custom");
         } else if (!gmailFragmentNotShowing && GmailWebViewFragment.myWebView.canGoBack()) {
              GmailWebViewFragment.myWebView.goBack();
-        } else if (!youtubeFragmentNotShowing && YouTubeWebView.myWebView.canGoBack()) {
-            YouTubeWebView.myWebView.goBack();
+        } else if (!youtubeFragmentNotShowing && YouTubeWebViewFragment.myWebView.canGoBack()) {
+            YouTubeWebViewFragment.myWebView.goBack();
         }
         else {
             Log.i("Main Activity", "Non of the back buttons worked");
