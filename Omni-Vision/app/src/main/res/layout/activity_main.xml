@@ -9,7 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.example.omni_vision.MainActivity">
+    tools:context="com.jdextermilling.omni_vision.MainActivity">
 
     <SurfaceView
         android:id="@+id/surfaceview"

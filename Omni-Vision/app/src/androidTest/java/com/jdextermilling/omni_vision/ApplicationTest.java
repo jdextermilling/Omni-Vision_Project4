@@ -1,4 +1,4 @@
-package com.example.omni_vision;
+package com.jdextermilling.omni_vision;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

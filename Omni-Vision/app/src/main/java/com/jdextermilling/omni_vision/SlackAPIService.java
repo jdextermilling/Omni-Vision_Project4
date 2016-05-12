@@ -1,6 +1,6 @@
-package com.example.omni_vision;
+package com.jdextermilling.omni_vision;
 
-import com.example.omni_vision.Model.SlackMessage;
+import com.jdextermilling.omni_vision.Model.SlackMessage;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

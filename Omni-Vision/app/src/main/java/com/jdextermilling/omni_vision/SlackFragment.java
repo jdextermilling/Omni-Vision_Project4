@@ -1,6 +1,5 @@
-package com.example.omni_vision;
+package com.jdextermilling.omni_vision;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.omni_vision.Model.SlackMessage;
-
-import java.util.ArrayList;
+import com.jdextermilling.omni_vision.Model.SlackMessage;
 
 import retrofit2.Call;
 import retrofit2.Callback;

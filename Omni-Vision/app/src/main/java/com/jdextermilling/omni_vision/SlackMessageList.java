@@ -1,4 +1,4 @@
-package com.example.omni_vision;
+package com.jdextermilling.omni_vision;
 
 import java.util.ArrayList;
 
