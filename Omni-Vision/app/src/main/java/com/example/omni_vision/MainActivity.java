@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.leftFrameLayout, wikiPediaWebViewFragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
-                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_LONG);
                     toast.show();
                     customWebViewEditText.setVisibility(View.GONE);
                     urlSubmittButton.setVisibility(View.GONE);
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.leftFrameLayout, gmailWebViewFragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
-                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_LONG);
                     toast.show();
                     customWebViewEditText.setVisibility(View.GONE);
                     urlSubmittButton.setVisibility(View.GONE);
@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.leftFrameLayout, customWebViewFragment);
                     fragmentTransaction.commit();
                     leftFrameLayout.setVisibility(View.VISIBLE);
+                    Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_LONG);
                     customButton.animate().rotation(360);
                     customFragmentNotShowing = false;
                 } else if (!customFragmentNotShowing) {
@@ -250,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 leftFrameLayout.setVisibility(View.VISIBLE);
                 urlSubmittButton.animate().rotation(360);
-                Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_LONG);
                 toast.show();
             }
         });
@@ -271,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.rightFrameLayout, youTubeWebView);
                     fragmentTransaction.commit();
                     rightFrameLayout.setVisibility(View.VISIBLE);
-                    Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_LONG).show();
                     youTubeButton.animate().rotation(360);
                     youtubeFragmentNotShowing = false;
                 } else if (!youtubeFragmentNotShowing) {
