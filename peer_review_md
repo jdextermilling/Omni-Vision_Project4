@@ -1,0 +1,35 @@
+
+1. Does the project appear to meet the technical requirements? Write up one sentence on your findings and give a score 0-3.
+Is your peer making API calls, using SDK's/third-party libraries?
+- I see that retrofit and gson libraries are installed but I don't see where you are using them. 
+Is your peer making use of Services? If so, are they offloading long tasks to a separate thread, i.e. AsyncTask, Runnable, IntentService, etc.
+- Doesn't look like you are using any services. Doesn't really loook like you need to. 
+Is your peer making use of Fragments? If so, are they passing data from Fragment to Activity via interfaces? If not, why did absense of Fragments make sense?
+- Alot of fragments. Great use of fragments. The way the layout of the is, the fragments don't need to use interfaces to comminucate between fragments. 
+Is your peer making use of RecyclerView? If so, does it appear to be working correctly ( implementation and otherwise )?
+- I don't see a recycler view, theres no list that would require a recycler view. 
+Is your peer making use of some sort of persistent storage, i.e. Firebase or SQLite? If so, why do you think Firebase/SQLite was chosen? Could they have used one or the other instead and why?
+- There is no need to store anything, that I see, so there is no use of Firebase or SQLite. 
+
+2. Does the project appear to be creative, innovative, and different from any competition? Write up one sentence on your findings and give a score 0-3.
+Is your peer making use of proper UX patterns we learned in class? If not, what are they doing that is unconvetional or that might confuse a user ( you )?
+- I think it looks like good UX structure. Pretty intuative and easy to follow whats happening. 
+Is your peer making anything cool or awesome that you would like to note or applaud them on?
+- Playing with the alpha to make the webviews seethrough is really cool. Looking through the camera is really cool too. 
+
+3. Does the project appear to follow correct coding styles and best practices? Write up one sentence on your findings and give a score 0-3.
+Are you able to reasonably follow the code without having anyone answer your questions?
+- Alot of comments made it really easy to follow. 
+Are you able to make sense of what the code is doing or is trying to do?
+- Yes. Easy to tell whats going on. 
+
+4. Find two pieces of code of any size: one that is readable and easy to follow and one that is difficult to follow and understand.
+What makes the readable code readable? Be as detailed as you can in your answer, it can be challenging to explain why something is easy to undertand
+- All of it was readible thanks to all of the comments. 
+What makes the difficult code harder to follow? Be as detailed as you can in your answer.
+- Its still early but remember to delete unused commented code later. 
+
+5. High level project overview: Take a look at as many individual files as you have time for
+- Very detailed class names. Lots of comments. Good use of TODOs. Well Structured. Easy to follow. Good Job. 
+
+Dude, your app is sick. Such a creative idea. Your code is really organized so it is easy to follow. Maybe make a folder to hold the fragments. Can't wait to see what you got on Friday. 
