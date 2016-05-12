@@ -27,40 +27,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SlackFragment extends Fragment {
 
-    private static final String CURRENT_MESSAGELIST = "current_messagelist";
-    SharedPreferences sharedPreferences5;
 
     SlackAPIService slackAPIService;
-
-    String initialMessage = "Send a message to Funny Biz~";
-    //ArrayList<String> messageList;
     ArrayAdapter adapter;
     ListView slackListView;
-
     public static final String BASE_URL = "https://hooks.slack.com/services/T0351JZQ0/";
     //"B17M3E46M/DiP0k4QOett4tzCXVjt544OD";
-
     Retrofit retrofit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.slack_fragemnt, container, false);
-
         slackListView = (ListView) view.findViewById(R.id.slack_listView);
-
         SlackMessageList.getInstance();
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,
                 SlackMessageList.getInstance().posts);
         slackListView.setAdapter(adapter);
-
-
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         slackAPIService = retrofit.create(SlackAPIService.class);
-
 
         return view;
     }
@@ -68,7 +55,6 @@ public class SlackFragment extends Fragment {
     public void setMyMessage(final String myMessage) {
         SlackMessageList.getInstance().posts.add(myMessage);
         adapter.notifyDataSetChanged();
-
         slackAPIService.sendMessage(new SlackMessage(myMessage))
                 .enqueue(new Callback<Void>() {
                     @Override

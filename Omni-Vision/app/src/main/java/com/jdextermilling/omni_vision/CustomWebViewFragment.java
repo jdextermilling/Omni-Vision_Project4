@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 public class CustomWebViewFragment extends Fragment {
 
     private static final String CURRENT_URL = "current_custom_url";
-    public static WebView myWebView;
+    private WebView myWebView;
     String customURL;
     String myUrl;
 
@@ -48,6 +48,20 @@ public class CustomWebViewFragment extends Fragment {
         myWebView.loadUrl(myUrl);
 
         return view;
+    }
+
+
+    public void loadNewUrl(String url){
+        setCustomURL(url);
+        myWebView.loadUrl(customURL);
+    }
+
+    public boolean webviewCanGoBack(){
+        return myWebView.canGoBack();
+    }
+
+    public void webviewGoBack(){
+        myWebView.goBack();
     }
 
     private class MyWebViewClient extends WebViewClient {

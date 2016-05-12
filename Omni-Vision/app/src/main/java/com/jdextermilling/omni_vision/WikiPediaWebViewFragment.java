@@ -19,9 +19,8 @@ import android.webkit.WebViewClient;
 
 public class WikiPediaWebViewFragment extends Fragment {
     private static final String CURRENT_URL = "current_wiki_url";
-    private static final String TAG = WikiPediaWebViewFragment.class.getSimpleName();
 
-    public static WebView myWebView;
+    private WebView myWebView;
     String wikiPediaURL = "https://en.wikipedia.org/wiki/Main_Page";
     String myUrl = null;
     SharedPreferences sharedPreferences;
@@ -45,11 +44,16 @@ public class WikiPediaWebViewFragment extends Fragment {
         myWebView.loadUrl(myUrl);
 
 
-//        myWebView.canGoBack();
-//        myWebView.canZoomIn();
-
         return view;
 
+    }
+
+    public boolean webviewCanGoBack(){
+        return myWebView.canGoBack();
+    }
+
+    public void webviewGoBack(){
+        myWebView.goBack();
     }
 
 

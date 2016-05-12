@@ -18,7 +18,7 @@ public class YouTubeWebViewFragment extends Fragment {
     private static final String CURRENT_URL = "current_youtube_url";
     SharedPreferences sharedPreferences4;
 
-    public static WebView myWebView;
+    private WebView myWebView;
     String youTubeURL = "https://www.youtube.com/";
     String myUrl;
 
@@ -44,6 +44,15 @@ public class YouTubeWebViewFragment extends Fragment {
 
         return view;
     }
+
+    public boolean webviewCanGoBack(){
+        return myWebView.canGoBack();
+    }
+
+    public void webviewGoBack(){
+        myWebView.goBack();
+    }
+
 
     private class MyWebViewClient extends WebViewClient {
         @Override
