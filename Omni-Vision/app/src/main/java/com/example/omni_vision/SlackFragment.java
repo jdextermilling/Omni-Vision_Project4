@@ -36,7 +36,7 @@ public class SlackFragment extends Fragment {
     SlackAPIService slackAPIService;
 
     String initialMessage = "Send a message to Funny Biz~";
-    ArrayList<String> messageList;
+    //ArrayList<String> messageList;
     ArrayAdapter adapter;
     ListView slackListView;
 
@@ -50,14 +50,19 @@ public class SlackFragment extends Fragment {
         View view = inflater.inflate(R.layout.slack_fragemnt, container, false);
 
         slackListView = (ListView) view.findViewById(R.id.slack_listView);
-        messageList = new ArrayList<>();
-        messageList.add(initialMessage);
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);
+
+        SlackMessageList.getInstance();
+        //messageList = new ArrayList<>();
+
+        //SlackMessageList.getInstance().posts.add(initialMessage);
+        //messageList.add(initialMessage);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,
+                SlackMessageList.getInstance().posts);
         slackListView.setAdapter(adapter);
 
 
 
-        sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
+        //sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
 
 
 
@@ -73,7 +78,7 @@ public class SlackFragment extends Fragment {
     }
 
     public void setMyMessage(final String myMessage) {
-        messageList.add(myMessage);
+        SlackMessageList.getInstance().posts.add(myMessage);
         adapter.notifyDataSetChanged();
 
         slackAPIService.sendMessage(new SlackMessage(myMessage))
@@ -89,7 +94,7 @@ public class SlackFragment extends Fragment {
                     public void onFailure(Call<Void> call, Throwable t) {
                         t.printStackTrace();
                         Log.e("SlackFragment", "Message failed to post: " + myMessage);
-                        messageList.remove(myMessage);
+                        SlackMessageList.getInstance().posts.remove(myMessage);
                         adapter.notifyDataSetChanged();
                     }
                 });
