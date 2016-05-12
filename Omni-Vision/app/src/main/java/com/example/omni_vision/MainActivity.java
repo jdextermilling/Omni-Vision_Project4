@@ -244,14 +244,12 @@ public class MainActivity extends AppCompatActivity {
         urlSubmittButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (customWebViewFragment == null) {
-                    customWebViewFragment = new CustomWebViewFragment();
-                }
+                customWebViewFragment = new CustomWebViewFragment();
+                customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.leftFrameLayout, customWebViewFragment);
                 fragmentTransaction.commit();
-                customWebViewFragment.setCustomURL(customWebViewEditText.getText().toString());
                 leftFrameLayout.setVisibility(View.VISIBLE);
                 urlSubmittButton.animate().rotation(360);
                 Toast toast = Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT);
