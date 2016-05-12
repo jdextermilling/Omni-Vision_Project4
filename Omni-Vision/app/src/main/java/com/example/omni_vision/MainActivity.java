@@ -1,5 +1,8 @@
 package com.example.omni_vision;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.hardware.Camera;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -116,6 +119,18 @@ public class MainActivity extends AppCompatActivity {
         slackSubmittButton.setVisibility(View.GONE);
         slackEditText = (EditText) findViewById(R.id.slackEditText);
         slackEditText.setVisibility(View.GONE);
+
+
+        /**
+         * Setting up notifications(Status bar icon)
+         */
+//        Notification notification = new Notification(R.drawable.eye, "Omni-Vision",
+//                System.currentTimeMillis());
+//        notification.flags |= Notification.FLAG_NO_CLEAR
+//                | Notification.FLAG_ONGOING_EVENT;
+//        NotificationManager notifier = (NotificationManager)
+//                getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
+//        notifier.notify(1, notification);
 
 
         /**
