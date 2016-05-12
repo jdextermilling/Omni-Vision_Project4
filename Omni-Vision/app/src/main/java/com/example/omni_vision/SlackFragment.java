@@ -52,18 +52,9 @@ public class SlackFragment extends Fragment {
         slackListView = (ListView) view.findViewById(R.id.slack_listView);
 
         SlackMessageList.getInstance();
-        //messageList = new ArrayList<>();
-
-        //SlackMessageList.getInstance().posts.add(initialMessage);
-        //messageList.add(initialMessage);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,
                 SlackMessageList.getInstance().posts);
         slackListView.setAdapter(adapter);
-
-
-
-        //sharedPreferences5 = getContext().getSharedPreferences("countPrefFive", Context.MODE_PRIVATE);
-
 
 
         retrofit = new Retrofit.Builder()
