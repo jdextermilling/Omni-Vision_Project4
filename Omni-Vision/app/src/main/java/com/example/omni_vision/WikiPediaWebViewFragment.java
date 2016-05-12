@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class WikiPediaWebViewFragment extends Fragment {
     private static final String CURRENT_URL = "current_wiki_url";
     private static final String TAG = WikiPediaWebViewFragment.class.getSimpleName();
 
-    WebView myWebView;
+    public static WebView myWebView;
     String wikiPediaURL = "https://en.wikipedia.org/wiki/Main_Page";
     String myUrl = null;
     SharedPreferences sharedPreferences;
@@ -38,13 +39,8 @@ public class WikiPediaWebViewFragment extends Fragment {
         myWebView = (WebView) view.findViewById(R.id.wikiPediaWebView);
         sharedPreferences = getContext().getSharedPreferences("countPrefOne", Context.MODE_PRIVATE);
 
-
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new MyWebViewClient());
-
-
-
-        //runWebView();
 
         myUrl = sharedPreferences.getString(CURRENT_URL, null);
 
@@ -53,32 +49,15 @@ public class WikiPediaWebViewFragment extends Fragment {
         }
         myWebView.loadUrl(myUrl);
 
+
+//        myWebView.canGoBack();
+//        myWebView.canZoomIn();
+
         return view;
 
     }
 
-    public void runWebView(){
-        if (myUrl == null) {
-            myUrl = wikiPediaURL;
-            myWebView.loadUrl(myUrl);
-        } else{
-            myUrl = sharedPreferences.getString(CURRENT_URL, null);
-            myWebView.loadUrl(myUrl);
-        }
-    }
 
-    /**
-     *
-     * @param newHome if new home is set to null the WebView will reset itself to display the Wikipedia homepage.
-     */
-    public void setNewWebViewHome(@Nullable String newHome) {
-        Log.w(TAG, "Home url was set to null by: setNewWebViewHome()");
-        sharedPreferences.edit().putString(CURRENT_URL, newHome).apply();
-    }
-
-    public void resetWebView(){
-        sharedPreferences.edit().putString(CURRENT_URL, null).apply();
-    }
 
     private class MyWebViewClient extends WebViewClient {
         @Override

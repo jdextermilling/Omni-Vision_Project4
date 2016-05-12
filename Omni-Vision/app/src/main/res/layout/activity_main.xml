@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/holo_red_dark"
         android:orientation="horizontal"
         android:alpha="0.5">
@@ -79,7 +79,7 @@
             android:id="@+id/customWebViewEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter Web Address"
+            android:hint="http://www.                        "
             android:padding="3dp"
             android:layout_below="@+id/customButton"
             android:background="@android:color/holo_orange_dark"
@@ -92,25 +92,66 @@
             android:id="@+id/urlSubmittButton"
             android:layout_width="85dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="57dp"
             android:background="@android:color/holo_orange_dark"
             android:alpha="0.5"
-            android:layout_toRightOf="@id/customWebViewEditText"
-            android:layout_below="@+id/customButton"
             android:text="Submitt"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:layout_alignBottom="@+id/customWebViewEditText"
+            android:layout_alignRight="@+id/customButton"
+            android:layout_alignEnd="@+id/customButton" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_marginRight="20dp"
+        android:alpha="0.5"
+        android:layout_below="@+id/rightMainButtonFrame"
+        android:layout_alignLeft="@+id/rightMainButtonFrame"
+        android:layout_alignStart="@+id/rightMainButtonFrame">
+
+        <EditText
+            android:id="@+id/slackEditText"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Write a Message"
+            android:padding="3dp"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:textColor="@android:color/white"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp" />
+
+        <Button
+            android:id="@+id/slackSubmittButton"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/holo_orange_dark"
+            android:alpha="0.5"
+            android:text="Post it"
+            android:textColor="@android:color/white"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/rightMainButtonFrame"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/holo_red_dark"
         android:orientation="horizontal"
         android:alpha="0.5"
@@ -125,7 +166,7 @@
             android:background="@android:color/holo_blue_dark"
             android:text="Maps"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/slackButton"
@@ -133,9 +174,9 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@android:color/holo_blue_dark"
-            android:text="FaceBook"
+            android:text="Slack"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/youTubeButton"
@@ -145,26 +186,28 @@
             android:background="@android:color/holo_blue_dark"
             android:text="YouTube"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/rightMainButton"
-            android:layout_width="50dp"
+            android:layout_width="55dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:layout_toLeftOf="@+id/rightMainButton"
             android:background="@android:color/holo_blue_dark"
             android:text="Media"
             android:alpha="0.5"
-            android:textColor="@android:color/white"/>
+            android:padding="5dp"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/fragmentFrame"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/leftMainButtonFrame">
+        android:layout_below="@+id/leftMainButtonFrame"
+        android:layout_alignParentBottom="true">
 
         <FrameLayout
             android:id="@+id/leftFrameLayout"
@@ -174,19 +217,19 @@
 
             android:layout_marginLeft="20dp"
             android:background="@android:color/holo_red_dark"
-            android:alpha="0.5">
+            android:alpha="0.5"
+            android:layout_alignParentBottom="true">
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/rightFrameLayout"
             android:layout_width="350dp"
             android:layout_height="450dp"
-
             android:layout_alignParentRight="true"
-
             android:layout_marginRight="20dp"
             android:background="@android:color/holo_red_dark"
-            android:alpha="0.5">
+            android:alpha="0.5"
+            android:layout_alignParentBottom="true">
         </FrameLayout>
     </RelativeLayout>
 

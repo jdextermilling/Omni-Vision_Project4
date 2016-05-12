@@ -13,12 +13,12 @@ import android.webkit.WebViewClient;
 /**
  * Created by JacobDexter-Milling on 5/9/16.
  */
-public class YouTubeWebView extends Fragment {
+public class YouTubeWebViewFragment extends Fragment {
 
     private static final String CURRENT_URL = "current_youtube_url";
     SharedPreferences sharedPreferences4;
 
-    WebView myWebView;
+    public static WebView myWebView;
     String youTubeURL = "https://www.youtube.com/";
     String myUrl;
 
