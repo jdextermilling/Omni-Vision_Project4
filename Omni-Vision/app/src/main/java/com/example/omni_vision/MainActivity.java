@@ -218,9 +218,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (customFragmentNotShowing) {
-                    if (customWebViewFragment == null) {
-                        customWebViewFragment = new CustomWebViewFragment();
-                    }
+                    CustomWebViewFragment customWebViewFragment = new CustomWebViewFragment();
                     urlSubmittButton.setVisibility(View.VISIBLE);
                     customWebViewEditText.setVisibility(View.VISIBLE);
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
